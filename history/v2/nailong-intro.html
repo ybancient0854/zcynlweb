@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>张策远你个臭乐乐 · 趣味档案站</title>
+<style>
+/* SECTION: base */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+:root {
+  --milk: #FFD34D;
+  --milk-light: #FFF3C9;
+  --milk-deep: #F5B800;
+  --ink: #4A3200;
+  --ink-soft: #7A5C1E;
+  --cream: #FFFDF5;
+  --accent: #FF8A3D;
+}
+html { scroll-behavior: smooth; }
+body {
+  font-family: "PingFang SC", "Microsoft YaHei", "Hiragino Sans GB", sans-serif;
+  background: var(--cream);
+  color: var(--ink);
+  line-height: 1.7;
+  overflow-x: hidden;
+}
+.wrap { max-width: 1080px; margin: 0 auto; padding: 0 20px; }
+
+/* SECTION: nav */
+nav {
+  position: sticky; top: 0; z-index: 50;
+  background: rgba(255, 253, 245, .92);
+  backdrop-filter: blur(8px);
+  border-bottom: 2px solid var(--milk-light);
+}
+.nav-inner { display: flex; align-items: center; justify-content: space-between; height: 60px; }
+.logo { font-weight: 800; font-size: 1.15rem; color: var(--ink); display: flex; align-items: center; gap: 8px; }
+.logo-dot { width: 14px; height: 14px; border-radius: 50%; background: var(--milk); display: inline-block; box-shadow: inset -2px -3px 0 rgba(0,0,0,.08); }
+.nav-links { display: flex; gap: 4px; }
+.nav-links a {
+  color: var(--ink-soft); text-decoration: none; font-size: .95rem;
+  padding: 8px 14px; border-radius: 999px; transition: all .2s;
+}
+.nav-links a:hover { background: var(--milk-light); color: var(--ink); }
+
+/* SECTION: hero */
+.hero {
+  min-height: calc(100vh - 60px);
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  text-align: center; position: relative; padding: 60px 20px;
+  background: radial-gradient(circle at 50% 20%, #FFF8DE 0%, var(--cream) 65%);
+}
+.hero-img-box {
+  width: min(300px, 60vw); aspect-ratio: 1 / 1; border-radius: 50%;
+  overflow: hidden; background: linear-gradient(145deg, var(--milk-light), var(--milk));
+  box-shadow: 0 18px 50px rgba(245, 184, 0, .35);
+  animation: floaty 4s ease-in-out infinite; cursor: pointer; position: relative;
+}
+.hero-img-box img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.hero-img-box.fallback::after {
+  content: "奶龙"; position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+  font-size: 3rem; font-weight: 900; color: #fff; text-shadow: 0 4px 12px rgba(0,0,0,.2);
+}
+@keyframes floaty { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-14px); } }
+.bubble {
+  position: absolute; top: -14px; right: -30px; background: #fff; border: 3px solid var(--milk);
+  border-radius: 18px 18px 18px 4px; padding: 8px 14px; font-size: .9rem; font-weight: 700;
+  color: var(--ink); opacity: 0; transform: scale(.6); transition: all .25s; pointer-events: none; white-space: nowrap;
+}
+.bubble.show { opacity: 1; transform: scale(1); }
+.mega-title {
+  margin-top: 36px;
+  font-size: clamp(2.4rem, 9vw, 6.5rem);
+  font-weight: 900; letter-spacing: .04em; line-height: 1.2;
+  color: var(--ink);
+  text-shadow: 0 4px 0 var(--milk), 0 10px 24px rgba(245, 184, 0, .35);
+  animation: pop-in .9s cubic-bezier(.2, 1.4, .4, 1) both;
+}
+@keyframes pop-in {
+  0% { opacity: 0; transform: scale(.5) translateY(40px); }
+  100% { opacity: 1; transform: scale(1) translateY(0); }
+}
+.hero-sub {
+  margin-top: 18px; font-size: clamp(1rem, 2.4vw, 1.3rem); color: var(--ink-soft);
+  animation: pop-in .9s .25s cubic-bezier(.2, 1.4, .4, 1) both;
+}
+.hero-tags { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-top: 22px; animation: pop-in .9s .4s both; }
+.tag {
+  background: var(--milk-light); border: 2px solid var(--milk); color: var(--ink);
+  border-radius: 999px; padding: 6px 16px; font-size: .9rem; font-weight: 600;
+}
+.cta {
+  margin-top: 34px; display: inline-block; text-decoration: none;
+  background: var(--milk); color: var(--ink); font-weight: 800; font-size: 1.05rem;
+  padding: 14px 40px; border-radius: 999px; border: none; cursor: pointer;
+  box-shadow: 0 8px 0 var(--milk-deep); transition: transform .15s, box-shadow .15s;
+  animation: pop-in .9s .55s both;
+}
+.cta:hover { transform: translateY(3px); box-shadow: 0 5px 0 var(--milk-deep); }
+
+/* SECTION: sections-common */
+section.block { padding: 72px 0; }
+.sec-title { font-size: clamp(1.6rem, 4vw, 2.3rem); font-weight: 900; text-align: center; margin-bottom: 10px; }
+.sec-title span { background: linear-gradient(transparent 62%, var(--milk-light) 62%); padding: 0 6px; }
+.sec-desc { text-align: center; color: var(--ink-soft); margin-bottom: 40px; }
+
+/* SECTION: profile */
+.profile-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+.p-card {
+  background: #fff; border: 3px solid var(--milk-light); border-radius: 22px;
+  padding: 22px 24px; transition: transform .2s, box-shadow .2s;
+}
+.p-card:hover { transform: translateY(-4px); box-shadow: 0 12px 28px rgba(245,184,0,.18); }
+.p-card h3 { font-size: 1.1rem; margin-bottom: 8px; color: var(--ink); display: flex; align-items: center; gap: 8px; }
+.p-card h3::before { content: ""; width: 10px; height: 10px; border-radius: 3px; background: var(--milk); flex: none; }
+.p-card p { color: var(--ink-soft); font-size: .96rem; }
+.profile-story {
+  margin-top: 26px; background: linear-gradient(135deg, #FFF8DE, #fff);
+  border: 3px dashed var(--milk); border-radius: 22px; padding: 26px 28px; font-size: 1rem;
+}
+.profile-story strong { color: var(--ink); }
+
+/* SECTION: data */
+.data-band { background: var(--milk); padding: 64px 0; }
+.data-band .sec-title span { background: rgba(255,255,255,.55); }
+.data-band .sec-desc { color: var(--ink); }
+.data-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+.d-card {
+  background: var(--cream); border-radius: 20px; padding: 26px 18px; text-align: center;
+  box-shadow: 0 6px 0 rgba(0,0,0,.08);
+}
+.d-num { font-size: clamp(1.7rem, 4vw, 2.4rem); font-weight: 900; color: var(--accent); line-height: 1.2; }
+.d-label { margin-top: 6px; font-size: .92rem; color: var(--ink-soft); font-weight: 600; }
+.d-note { margin-top: 26px; text-align: center; font-size: .85rem; color: var(--ink); opacity: .75; }
+
+/* SECTION: meme */
+.meme-list { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+.m-card {
+  background: #fff; border-radius: 22px; padding: 24px; border-left: 8px solid var(--milk);
+  box-shadow: 0 6px 18px rgba(0,0,0,.06);
+}
+.m-card h3 { font-size: 1.12rem; margin-bottom: 8px; }
+.m-card p { color: var(--ink-soft); font-size: .95rem; }
+
+/* SECTION: works */
+.works-band { background: #FFF8DE; }
+.work-list { display: grid; gap: 16px; max-width: 760px; margin: 0 auto; }
+.w-item {
+  display: flex; gap: 18px; align-items: flex-start; background: #fff;
+  border-radius: 18px; padding: 20px 22px; border: 2px solid var(--milk-light);
+}
+.w-year {
+  flex: none; font-weight: 900; color: #fff; background: var(--accent);
+  border-radius: 12px; padding: 6px 12px; font-size: .95rem;
+}
+.w-item h3 { font-size: 1.05rem; margin-bottom: 4px; }
+.w-item p { color: var(--ink-soft); font-size: .93rem; }
+
+/* SECTION: footer */
+footer { background: var(--ink); color: var(--milk-light); text-align: center; padding: 40px 20px; font-size: .88rem; }
+footer p + p { margin-top: 8px; opacity: .75; }
+
+/* SECTION: responsive */
+@media (max-width: 760px) {
+  .profile-grid, .meme-list { grid-template-columns: 1fr; }
+  .data-grid { grid-template-columns: repeat(2, 1fr); }
+  .nav-links a { padding: 8px 10px; font-size: .88rem; }
+  .bubble { right: -8px; }
+}
+@media (max-width: 460px) {
+  .data-grid { grid-template-columns: 1fr 1fr; gap: 12px; }
+  .nav-links a:nth-child(4) { display: none; }
+}
+</style>
+</head>
+<body>
+
+<!-- SECTION: nav -->
+<nav>
+  <div class="wrap nav-inner">
+    <div class="logo"><span class="logo-dot"></span>张策远趣味档案</div>
+    <div class="nav-links">
+      <a href="#profile">趣味档案</a>
+      <a href="#data">数据面板</a>
+      <a href="#meme">名场面</a>
+      <a href="#works">彩蛋</a>
+    </div>
+  </div>
+</nav>
+
+<!-- SECTION: hero -->
+<header class="hero">
+  <div class="hero-img-box" id="heroImgBox" title="点我一下">
+    <img data-image="https://workspace-cdn.uzone.com/83f585f3ea0343d1b9f869e8e032a844%2Fo%2F1791015130930-c.webp.jpg?auth_key=1793607131-0-0-321df3555880e2a685257c73a07706d7" alt="本站封面嘉宾奶龙：黄色圆脑袋、呆萌大眼的动漫形象">
+    <div class="bubble" id="bubble">张策远你个臭乐乐！</div>
+  </div>
+  <h1 class="mega-title">张策远你个臭乐乐</h1>
+  <p class="hero-sub">—— 本站由同学友情打造，纯属玩笑娱乐，内容皆为趣味演绎</p>
+  <div class="hero-tags">
+    <span class="tag">班级气氛担当</span>
+    <span class="tag">臭乐乐本乐</span>
+    <span class="tag">封面嘉宾：奶龙</span>
+  </div>
+  <a class="cta" href="#profile" data-primary-action>看看这位同学</a>
+</header>
+
+<!-- SECTION: profile -->
+<section class="block" id="profile">
+  <div class="wrap">
+    <h2 class="sec-title"><span>趣味档案</span></h2>
+    <p class="sec-desc">以下内容由同学凭日常相处印象撰写，纯属玩笑娱乐，不代表任何真实评价</p>
+    <div class="profile-grid">
+      <div class="p-card">
+        <h3>基本设定</h3>
+        <p>姓名：张策远｜外号：臭乐乐｜身份：本站封面钦定嘉宾、班级气氛组成员（以上均为玩笑设定）。</p>
+      </div>
+      <div class="p-card">
+        <h3>江湖传闻</h3>
+        <p>据说走到哪里都能自带背景音，一笑起来周围人就绷不住；具体事迹本站不予核实，欢迎当事人本人到场申辩。</p>
+      </div>
+      <div class="p-card">
+        <h3>招牌口头禅</h3>
+        <p>本站仅收录一句已获广泛流传的经典语录——"张策远你个臭乐乐"，出处不明，考据工作仍在进行中。</p>
+      </div>
+      <div class="p-card">
+        <h3>最佳拍档</h3>
+        <p>本站封面嘉宾奶龙，一只黄澄澄的呆萌异星幼龙，负责卖萌，张策远负责当段子主角，配合默契。</p>
+      </div>
+    </div>
+    <div class="profile-story">
+      <strong>建站说明：</strong>这个页面由张策远的同学制作，目的只有一个——把他的名字用最大的字号挂在网页正中间。页面所有文字均为娱乐向玩笑演绎，没有任何经过核实的事实信息；封面图片为动漫形象"奶龙"，其版权归原作者方所有。如果你就是张策远本人，欢迎提出修改意见。
+    </div>
+  </div>
+</section>
+
+<!-- SECTION: data -->
+<section class="block data-band" id="data">
+  <div class="wrap">
+    <h2 class="sec-title"><span>数据面板</span></h2>
+    <p class="sec-desc">以下数值全部为同学玩笑演绎，与任何真实统计无关</p>
+    <div class="data-grid">
+      <div class="d-card"><div class="d-num">100%</div><div class="d-label">名字出现率</div></div>
+      <div class="d-card"><div class="d-num">1 句</div><div class="d-label">经典语录收录量</div></div>
+      <div class="d-card"><div class="d-num">MAX</div><div class="d-label">标题字号（本站之最）</div></div>
+      <div class="d-card"><div class="d-num">0 条</div><div class="d-label">经核实的事实信息</div></div>
+      <div class="d-card"><div class="d-num">1 位</div><div class="d-label">封面嘉宾（奶龙）</div></div>
+      <div class="d-card"><div class="d-num">∞</div><div class="d-label">同学间玩笑容量</div></div>
+    </div>
+    <p class="d-note">本面板不提供任何可引用的真实数据，仅为页面趣味性设计。</p>
+  </div>
+</section>
+
+<!-- SECTION: meme -->
+<section class="block" id="meme">
+  <div class="wrap">
+    <h2 class="sec-title"><span>名场面</span></h2>
+    <p class="sec-desc">本区留白待补，具体事迹请同学本人或知情者提供后填入</p>
+    <div class="meme-list">
+      <div class="m-card">
+        <h3>名场面一：待补充</h3>
+        <p>此处原本准备写一段张策远的经典事迹，但为避免编造，暂留空白。欢迎本人授权后补齐。</p>
+      </div>
+      <div class="m-card">
+        <h3>名场面二：待补充</h3>
+        <p>第二个格子同样虚位以待。谁有可靠素材，请联系站长（也就是他的同学）。</p>
+      </div>
+      <div class="m-card">
+        <h3>名场面三：待补充</h3>
+        <p>本页坚持不虚构具体事件，宁可空着也不瞎编，这是本站的基本操守。</p>
+      </div>
+      <div class="m-card">
+        <h3>名场面四：待补充</h3>
+        <p>最后一格留给最有分量的那条。目前唯一确认的内容是：他的名字已经出现在首页最大号标题上。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION: works -->
+<section class="block works-band" id="works">
+  <div class="wrap">
+    <h2 class="sec-title"><span>彩蛋</span></h2>
+    <p class="sec-desc">关于这个页面本身，有几件事想说明</p>
+    <div class="work-list">
+      <div class="w-item">
+        <div class="w-year">01</div>
+        <div><h3>标题是认真做的</h3><p>首页那句巨大标语是全站唯一被明确要求的内容，字号拉到页面能撑住的上限，力求一眼难忘。</p></div>
+      </div>
+      <div class="w-item">
+        <div class="w-year">02</div>
+        <div><h3>封面嘉宾是奶龙</h3><p>圆形封面图为动漫形象"奶龙"，与本站主题无必然联系，纯属同学个人喜好，点一下它还会说话。</p></div>
+      </div>
+      <div class="w-item">
+        <div class="w-year">03</div>
+        <div><h3>没有编造事迹</h3><p>页面不虚构张策远的任何具体经历，名场面区留白待补；能确认的只有他是本页主角，也是站长的同学。</p></div>
+      </div>
+      <div class="w-item">
+        <div class="w-year">04</div>
+        <div><h3>随时可以改</h3><p>想加照片、换标语、补名场面或调整配色，说一声就能在这个版本上继续改。</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION: footer -->
+<footer>
+  <p>张策远趣味档案站 · 同学自制玩笑页面｜标语"张策远你个臭乐乐"为全站核心内容</p>
+  <p>页面文字均为娱乐向玩笑演绎，不含经核实的事实信息。封面图片为动漫形象"奶龙"，版权归原作者方所有。</p>
+</footer>
+
+<script>
+/* SECTION: image-load */
+document.querySelectorAll("img[data-image]").forEach(function (img) {
+  img.src = img.getAttribute("data-image");
+  img.addEventListener("error", function () {
+    img.style.display = "none";
+    img.parentElement.classList.add("fallback");
+  });
+});
+
+/* SECTION: bubble-interaction */
+var box = document.getElementById("heroImgBox");
+var bubble = document.getElementById("bubble");
+var bubbleTimer = null;
+box.addEventListener("click", function () {
+  bubble.classList.add("show");
+  if (bubbleTimer) clearTimeout(bubbleTimer);
+  bubbleTimer = setTimeout(function () { bubble.classList.remove("show"); }, 2200);
+});
+</script>
+</body>
+</html>
